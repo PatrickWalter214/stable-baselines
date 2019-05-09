@@ -39,7 +39,7 @@ def test_saving_tensorboard_twice_with_same_logname(model_name):
     model.learn(N_STEPS, tb_log_name=model_name)
     model.learn(N_STEPS, tb_log_name=model_name)
 
-    assert os.path.exists(TENSORBOARD_DIR + os.sep + model_name + "_1")
-    assert os.path.exists(TENSORBOARD_DIR + os.sep + model_name + "_2")
+    assert os.path.isdir(TENSORBOARD_DIR + model_name + "_1")
+    assert os.path.isdir(TENSORBOARD_DIR + model_name + "_2")
 
 
