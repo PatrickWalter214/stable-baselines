@@ -31,3 +31,15 @@ def test_tensorboard(model_name):
     model = algo('MlpPolicy', env_id, verbose=1, tensorboard_log=TENSORBOARD_DIR)
     model.learn(N_STEPS)
     model.learn(N_STEPS, reset_num_timesteps=False)
+
+@pytest.mark.parametrize("model_name", MODEL_DICT.keys())
+def test_saving_tensorboard_twice_with_same_logname(model_name):
+    algo, env_id = MODEL_DICT[model_name]
+    model = algo('MlpPolicy', env_id, verbose=1, tensorboard_log=TENSORBOARD_DIR)
+    model.learn(N_STEPS, tb_log_name=model_name)
+    model.learn(N_STEPS, tb_log_name=model_name)
+
+    assert os.path.exists(TENSORBOARD_DIR + os.sep + model_name + "_1")
+    assert os.path.exists(TENSORBOARD_DIR + os.sep + model_name + "_2")
+
+
