@@ -37,7 +37,7 @@ def test_tensorboard(model_name):
     assert not os.path.isdir(TENSORBOARD_DIR + logname + "_2")
 
 @pytest.mark.parametrize("model_name", MODEL_DICT.keys())
-def test_tensorboard_twice_with_same_logname(model_name):
+def test_multiple_run(model_name):
     logname = "tbTwiceWithSameLognameTest_" + model_name
     algo, env_id = MODEL_DICT[model_name]
     model = algo('MlpPolicy', env_id, verbose=1, tensorboard_log=TENSORBOARD_DIR)
